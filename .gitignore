@@ -34,3 +34,5 @@
 # cmake build dir
 /build
 /deps
+/compile_flags.txt
+.cache

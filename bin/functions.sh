@@ -21,6 +21,17 @@ function log() {
        fi
     fi
 }
+die_if_err(){
+  local error=$?
+  if (( error ));then
+    log "$1" red
+    exit
+  fi
+}
+
+fun_exists(){
+  type $1 > /dev/null 2>&1
+}
 
 has(){
     which $1 >/dev/null 2>&1
