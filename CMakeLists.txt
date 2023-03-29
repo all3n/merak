@@ -7,8 +7,8 @@ set(BUILD_GMOCK OFF CACHE BOOL "")
 set(BUILD_GTEST OFF CACHE BOOL "")
 set(INSTALL_GTEST OFF)
 
-file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/merak/*.cpp")
+file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/merak/*.h")
 
 option(ENABLE_TESTING "Enable testing of ${PROJECT_NAME}" OFF)
 option(DEBUG "DEBUG build ${PROJECT_NAME}" OFF)
@@ -18,6 +18,8 @@ message(STATUS "headers:${HEADERS}")
 
 find_package(gflags REQUIRED)
 find_package(glog REQUIRED)
+find_package(yaml-cpp REQUIRED)
+find_package(Backward)
 
 if (DEBUG)
   get_cmake_property(_variableNames VARIABLES)
@@ -28,8 +30,15 @@ if (DEBUG)
 endif()
 
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} gflags glog::glog)
+include_directories(.)
+
+
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${AC_HOME}/include)
+target_link_directories(${PROJECT_NAME} PRIVATE ${AC_HOME}/lib)
+target_link_libraries(${PROJECT_NAME} gflags glog::glog yaml-cpp ac Backward::Backward)
+#target_link_libraries(${PROJECT_NAME} gflags glog::glog yaml-cpp ac)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 

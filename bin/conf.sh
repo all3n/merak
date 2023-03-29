@@ -1,4 +1,5 @@
 export PROJECT=merak
+export APP_DIR=$CUR_DIR
 export HOOKS_DIR=$APP_DIR/hooks.d
 export PROJECT_DESC=$(cat << EOF
  ${PROJECT} is utility tool for cpp
@@ -13,10 +14,10 @@ fi
 export BUILD_DIR=$APP_DIR/build
 export BIN=$BUILD_DIR/merak
 
-export DEP_DIR=$APP_DIR/deps
-export DEP_PKG_DIR=$DEP_DIR/pkg
-export DEP_SRC_DIR=$DEP_DIR/src
-export DEP_INSTALL_DIR=$DEP_DIR/install
+#export DEP_DIR=$APP_DIR/deps
+#export DEP_PKG_DIR=$DEP_DIR/pkg
+#export DEP_SRC_DIR=$DEP_DIR/src
+#export DEP_INSTALL_DIR=$DEP_DIR/install
 
 . $APP_DIR/bin/functions.sh
 
